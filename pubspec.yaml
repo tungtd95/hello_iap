@@ -33,7 +33,7 @@ flavorizr:
   flavors:
     dev:
       app:
-        name: "Weather Dev"
+        name: "Hello IAP dev"
 
       android:
         applicationId: "com.sekiroflutter.helloiap.dev"
@@ -43,7 +43,7 @@ flavorizr:
 
     prod:
       app:
-        name: "Weather"
+        name: "Hello IAP"
 
       android:
         applicationId: "com.sekiroflutter.helloiap"

@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,19 +32,30 @@ class MyHomePage extends StatefulWidget {
 }
 
 class MyHomePageState extends State<MyHomePage> {
-  String purchaseProduct = '';
+  String purchaseProduct = 'Purchased products:\n';
 
   @override
   void initState() {
     super.initState();
-
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      if (Platform.isAndroid) {
+        final InAppPurchaseAndroidPlatformAddition androidAddition =
+            InAppPurchase.instance
+                .getPlatformAddition<InAppPurchaseAndroidPlatformAddition>();
+        var pastPurchases = await androidAddition.queryPastPurchases();
+        for (var element in pastPurchases.pastPurchases) {
+          purchaseProduct += '${element.status.name} >> ${element.productID}\n';
+        }
+        setState(() {});
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(''),
+        child: Text(purchaseProduct),
       ),
     );
   }

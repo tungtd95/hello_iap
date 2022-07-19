@@ -2,4 +2,4 @@
 
 FLUTTER_TARGET=lib/main.dart
 ASSET_PREFIX=dev
-BUNDLE_NAME=Weather Dev
+BUNDLE_NAME=Hello IAP dev
